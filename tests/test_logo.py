@@ -13,7 +13,7 @@ class TestLogo:
 
         main.click_scooter_logo()
 
-        assert "qa-scooter" in driver.current_url
+        assert "qa-scooter" in main.get_current_url()
 
     @allure.title("Переход по логотипу Яндекса в Дзен")
     @allure.step("Тест перехода по логотипу Яндекса")
@@ -24,8 +24,8 @@ class TestLogo:
 
         time.sleep(2)
 
-        driver.switch_to.window(driver.window_handles[-1])
+        main.switch_to_last_tab()
 
         time.sleep(2)
 
-        assert "dzen" in driver.current_url.lower()
+        assert "dzen" in main.get_current_url().lower()

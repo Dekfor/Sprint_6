@@ -18,7 +18,8 @@ class OrderPage(BasePage):
 
         first_option = (By.CSS_SELECTOR, ".select-search__option")
         self.wait_clickable(first_option)
-        self.driver.find_elements(*first_option)[0].click()
+        options = self.find_elements(first_option)
+        options[0].click()
 
     def click_next(self):
         self.click(OrderPageLocators.NEXT_BUTTON)
@@ -32,13 +33,13 @@ class OrderPage(BasePage):
         option = (By.CSS_SELECTOR, ".Dropdown-option")
         self.wait_visible(option)
 
-        self.driver.find_elements(*option)[0].click()
+        options = self.find_elements(option)
+        options[0].click()
         self.click((By.CSS_SELECTOR, ".App_App__15LM-"))
 
     def select_color(self):
         option = (By.CSS_SELECTOR, "label.Checkbox_Label__3wxSf")
         self.click(option)
-        self.driver.implicitly_wait(0.5)
 
     def click_order(self):
         self.click(OrderPageLocators.ORDER_BUTTON)
@@ -56,4 +57,4 @@ class OrderPage(BasePage):
         return self.get_text(OrderPageLocators.SUCCESS_HEADER)
     
     def refresh_page(self):
-        self.driver.refresh()
+        self.refresh_page()

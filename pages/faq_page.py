@@ -8,10 +8,7 @@ class FaqPage(BasePage):
 
     def open_question(self, index):
         question = self.wait_clickable(FaqLocators.QUESTIONS[index])
-        self.driver.execute_script(
-            "arguments[0].scrollIntoView({block: 'center'});",
-            question
-        )
+        self.scroll_to(question)
 
         time.sleep(0.5)
         self.wait.until(EC.element_to_be_clickable(FaqLocators.QUESTIONS[index]))
