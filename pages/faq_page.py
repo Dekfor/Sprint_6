@@ -1,7 +1,7 @@
 from pages.base_page import BasePage
 from locators.faq_locators import FaqLocators
 from selenium.webdriver.support import expected_conditions as EC
-import time, allure
+import allure
 
 
 class FaqPage(BasePage):
@@ -11,10 +11,13 @@ class FaqPage(BasePage):
         question = self.wait_clickable(FaqLocators.QUESTIONS[index])
         self.scroll_to(question)
 
-        time.sleep(0.5)
-        self.wait.until(EC.element_to_be_clickable(FaqLocators.QUESTIONS[index]))
+        self.click(
+        FaqLocators.QUESTIONS[index]
+    )
 
-        question.click()
+        self.wait_visible(
+        FaqLocators.ANSWERS[index]
+    )
 
         self.wait.until(
             EC.visibility_of_element_located(FaqLocators.ANSWERS[index])

@@ -1,5 +1,5 @@
 from pages.main_page import MainPage
-import allure, time
+import allure
 
 
 @allure.feature("Логотипы")
@@ -21,11 +21,7 @@ class TestLogo:
         main = MainPage(driver)
 
         main.click_yandex_logo()
-
-        time.sleep(2)
-
         main.switch_to_last_tab()
-
-        time.sleep(2)
+        main.wait_url_contains("dzen")
 
         assert "dzen" in main.get_current_url().lower()

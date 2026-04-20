@@ -42,4 +42,10 @@ class BasePage:
 
     def find_elements(self, locator):
         return self.driver.find_elements(*locator)
+    
+    def switch_to_new_tab(self):
+        self.wait.until(lambda d: len(d.window_handles) > 1)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
         
+    def wait_url_contains(self, text):
+        self.wait.until(lambda d: text in d.current_url.lower())
