@@ -1,6 +1,5 @@
 from pages.base_page import BasePage
 from locators.order_page_locators import OrderPageLocators
-from selenium.webdriver.common.by import By
 import allure
 
 class OrderPage(BasePage):
@@ -17,11 +16,8 @@ class OrderPage(BasePage):
     @allure.step("Выбрать метро")
     def select_metro(self):
         self.click(OrderPageLocators.METRO)
-
-        first_option = (By.CSS_SELECTOR, ".select-search__option")
-        self.wait_clickable(first_option)
-        options = self.find_elements(first_option)
-        options[0].click()
+        self.wait_clickable(OrderPageLocators.METRO_FIRST_OPTION)
+        self.click(OrderPageLocators.METRO_FIRST_OPTION)
 
     @allure.step("Нажать Далее")
     def click_next(self):
@@ -30,22 +26,19 @@ class OrderPage(BasePage):
     @allure.step("Выбрать дату доставки")
     def select_date(self):
         self.type(OrderPageLocators.DATE_INPUT, "31.01.2999")
-        self.click((By.CSS_SELECTOR, ".App_App__15LM-"))
+        self.click(OrderPageLocators.BACKGROUND)
 
     @allure.step("Выбрать срок аренды")
     def select_rent_period(self):
         self.click(OrderPageLocators.RENT_DROPDOWN)
-        option = (By.CSS_SELECTOR, ".Dropdown-option")
-        self.wait_visible(option)
+        self.wait_visible(OrderPageLocators.RENT_OPTION)
+        self.click(OrderPageLocators.RENT_OPTION)
 
-        options = self.find_elements(option)
-        options[0].click()
-        self.click((By.CSS_SELECTOR, ".App_App__15LM-"))
+        self.click(OrderPageLocators.BACKGROUND)
 
     @allure.step("Выбрать цвет")
     def select_color(self):
-        option = (By.CSS_SELECTOR, "label.Checkbox_Label__3wxSf")
-        self.click(option)
+        self.click(OrderPageLocators.COLOR_OPTION)
 
     @allure.step("Нажать заказать")
     def click_order(self):
