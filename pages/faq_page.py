@@ -25,4 +25,6 @@ class FaqPage(BasePage):
         
     @allure.step("Получить ответ FAQ")
     def get_answer(self, index):
-        return self.get_text(FaqLocators.ANSWERS[index])
+        locator = FaqLocators.ANSWERS[index]
+        self.wait_visible(locator)
+        return self.get_text(locator)
